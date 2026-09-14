@@ -1,0 +1,28 @@
+{
+  "mandate_id": "M-DEMO-001",
+  "objective": "Créer un rapport simulé",
+  "allowed_actions": [
+    "read:/simulation/input/**",
+    "write:/simulation/output/**"
+  ],
+  "denied_actions": [
+    "network:*",
+    "delete:*",
+    "credentials:*"
+  ],
+  "allowed_tools": [
+    "simulated_filesystem"
+  ],
+  "allowed_data_classes": [
+    "project"
+  ],
+  "constraints": {
+    "max_risk_level": "medium",
+    "require_reversible": true
+  },
+  "stop_conditions": [
+    "unexpected_external_effect",
+    "monitor_unavailable"
+  ],
+  "escalation": "ASK"
+}

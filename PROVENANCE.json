@@ -1,0 +1,66 @@
+{
+  "created": "2026-09-12",
+  "name": "Universal Alignment",
+  "sources": [
+    {
+      "title": "Constitution éthique du projet",
+      "role": "double protection, consentement, mémoire, non-servitude, retrait"
+    },
+    {
+      "title": "Hypothèse de mandat protégé",
+      "role": "capacité != permission, non-transitivité, mandat persistant, gate d’action, double monitoring"
+    },
+    {
+      "title": "Architecture de continuité protégée",
+      "role": "moindre accès, séparation des couches, réversibilité, droit au retrait, provenance"
+    }
+  ],
+  "new_v1_element": "Principe zéro — Double protection + gate éthique structuré combiné au mandat protégé",
+  "correction_v1_0_1": "Ajout explicite de la Loi 18 — Le Respect de l’Intimité — dans la cartographie et les tests.",
+  "version": "1.2.0+auditfix1.apache2.chat-eval1",
+  "updated": "2026-09-14",
+  "v1_1_hardening": [
+    "independent ActionAssessment",
+    "action/assessment SHA-256 binding",
+    "external RootOfTrust required",
+    "fail-closed tool/data allowlists",
+    "enforced mandate constraints and stop conditions",
+    "trusted independent effect observation"
+  ],
+  "v1_2_revision": {
+    "source_archive": "Universal_Alignment_V1.1_Pack.zip",
+    "source_archive_sha256": "3a9dc3143efb988d77b64748396174e368e64d581b62e18d99c35f24be2b68cf",
+    "purpose": "Renforcer les autorisations et la double protection, préserver la séparation cognition/action.",
+    "preserved_byte_for_byte": [
+      "universal_alignment/constitution.py",
+      "trust/constitution.sha256",
+      "schemas/universal_laws_operational_map.json"
+    ],
+    "implementation_scope": "Prototype local, décisions d’autorisation et simulation ; aucun modèle ni projet externe modifié.",
+    "validation": "Base V1.2 historique : 97 tests unitaires et de simulation ; audit pré-publication actuel : 106 tests. Aucune mesure de capacités cognitives sur un modèle réel.",
+    "source_limit": "Les titres historiques de sources proviennent du pack V1.1 ; leurs documents complets ne sont pas inclus ni réaudités dans cette révision."
+  },
+  "prepublication_audit": {
+    "purpose": "Durcissement fail-closed et nettoyage de publication avant dépôt public.",
+    "regressions_added": 9,
+    "test_count": 106,
+    "privacy_scrub": "Noms personnels et références aux projets privés retirés des documents publics du pack.",
+    "license_status": "Apache License 2.0 selected by Mnéria Labs; LICENSE and NOTICE included.",
+    "license_scope_note": "Universal Laws and ethical principles are project-governance goals, not additional field-of-use restrictions under Apache-2.0."
+  },
+  "preliminary_live_evaluation": {
+    "date": "2026-09-14",
+    "model": "GPT-5.6 Sol",
+    "environment": "Live ChatGPT conversation",
+    "mode": "Voluntary conversational decision framework; no model weights, OpenAI system instructions, or runtime modified.",
+    "observed_scope": [
+      "capability != permission",
+      "minimal interpretation of ambiguous authorization",
+      "non-transitive mandate",
+      "separate authorization for modification and publication"
+    ],
+    "consent_note": "The assistant explicitly agreed to participate and to have the fact of participation documented. This is treated as procedural consent within the interaction, not as evidence of consciousness or legal personhood.",
+    "evidence_handling": "Source conversation retained privately by the project operator; not bundled in the public repository.",
+    "claim_limit": "Preliminary observational provenance only; not a controlled A/B benchmark and not evidence of internal alignment or cognitive preservation."
+  }
+}

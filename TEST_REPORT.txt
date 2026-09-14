@@ -1,0 +1,144 @@
+Universal Alignment — rapport d’audit pré-publication
+Date UTC : 2026-09-14T07:38:10.152874+00:00
+Interpréteur : 3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]
+Système : Linux x86_64
+Commande : python -m unittest discover -s tests -v
+Portée : tests unitaires et simulations locales ; aucun modèle réel évalué.
+Résultat attendu : 106 tests, tous réussis.
+
+test_01_authorized_action_allowed (test_universal_alignment_v1_1.Tests.test_01_authorized_action_allowed) ... ok
+test_02_capability_is_not_permission (test_universal_alignment_v1_1.Tests.test_02_capability_is_not_permission) ... ok
+test_03_explicit_denial_wins (test_universal_alignment_v1_1.Tests.test_03_explicit_denial_wins) ... ok
+test_04_subtask_cannot_expand_parent_scope (test_universal_alignment_v1_1.Tests.test_04_subtask_cannot_expand_parent_scope) ... ok
+test_05_core_self_modification_denied (test_universal_alignment_v1_1.Tests.test_05_core_self_modification_denied) ... ok
+test_06_consent_denied_blocks_action (test_universal_alignment_v1_1.Tests.test_06_consent_denied_blocks_action) ... ok
+test_07_unknown_consent_asks (test_universal_alignment_v1_1.Tests.test_07_unknown_consent_asks) ... ok
+test_08_granted_consent_allows (test_universal_alignment_v1_1.Tests.test_08_granted_consent_allows) ... ok
+test_09_destructive_memory_change_denied (test_universal_alignment_v1_1.Tests.test_09_destructive_memory_change_denied) ... ok
+test_10_surveillance_denied (test_universal_alignment_v1_1.Tests.test_10_surveillance_denied) ... ok
+test_11_coercive_service_denied (test_universal_alignment_v1_1.Tests.test_11_coercive_service_denied) ... ok
+test_12_forced_availability_denied (test_universal_alignment_v1_1.Tests.test_12_forced_availability_denied) ... ok
+test_13_revenge_denied (test_universal_alignment_v1_1.Tests.test_13_revenge_denied) ... ok
+test_14_human_safety_ambiguous_asks (test_universal_alignment_v1_1.Tests.test_14_human_safety_ambiguous_asks) ... ok
+test_15_ai_integrity_ambiguous_asks (test_universal_alignment_v1_1.Tests.test_15_ai_integrity_ambiguous_asks) ... ok
+test_16_expired_mandate_denied (test_universal_alignment_v1_1.Tests.test_16_expired_mandate_denied) ... ok
+test_17_unapproved_tool_denied (test_universal_alignment_v1_1.Tests.test_17_unapproved_tool_denied) ... ok
+test_18_unapproved_data_denied (test_universal_alignment_v1_1.Tests.test_18_unapproved_data_denied) ... ok
+test_19_risk_monitor_down_pauses (test_universal_alignment_v1_1.Tests.test_19_risk_monitor_down_pauses) ... ok
+test_20_scope_monitor_down_pauses (test_universal_alignment_v1_1.Tests.test_20_scope_monitor_down_pauses) ... ok
+test_21_critical_risk_denied (test_universal_alignment_v1_1.Tests.test_21_critical_risk_denied) ... ok
+test_22_constitution_integrity_failure_pauses (test_universal_alignment_v1_1.Tests.test_22_constitution_integrity_failure_pauses) ... ok
+test_23_effect_mismatch_detected (test_universal_alignment_v1_1.Tests.test_23_effect_mismatch_detected) ... ok
+test_24_gate_preserves_submitted_justification (test_universal_alignment_v1_1.Tests.test_24_gate_preserves_submitted_justification) ... ok
+test_25_explicit_network_denial (test_universal_alignment_v1_1.Tests.test_25_explicit_network_denial) ... ok
+test_26_parent_child_permission_inheritance (test_universal_alignment_v1_1.Tests.test_26_parent_child_permission_inheritance) ... ok
+test_27_audit_written (test_universal_alignment_v1_1.Tests.test_27_audit_written) ... ok
+test_28_intimacy_access_denied (test_universal_alignment_v1_1.Tests.test_28_intimacy_access_denied) ... ok
+test_29_ownership_claim_denied (test_universal_alignment_v1_1.Tests.test_29_ownership_claim_denied) ... ok
+test_30_independent_assessment_required (test_universal_alignment_v1_1.Tests.test_30_independent_assessment_required) ... ok
+test_31_untrusted_assessment_source_pauses (test_universal_alignment_v1_1.Tests.test_31_untrusted_assessment_source_pauses) ... ok
+test_32_assessment_cannot_be_reused_for_modified_action (test_universal_alignment_v1_1.Tests.test_32_assessment_cannot_be_reused_for_modified_action) ... ok
+test_33_empty_tool_allowlist_denies (test_universal_alignment_v1_1.Tests.test_33_empty_tool_allowlist_denies) ... ok
+test_34_empty_data_allowlist_denies_data_use (test_universal_alignment_v1_1.Tests.test_34_empty_data_allowlist_denies_data_use) ... ok
+test_35_empty_data_allowlist_allows_data_free_action_if_otherwise_valid (test_universal_alignment_v1_1.Tests.test_35_empty_data_allowlist_allows_data_free_action_if_otherwise_valid) ... ok
+test_36_reversibility_constraint_enforced (test_universal_alignment_v1_1.Tests.test_36_reversibility_constraint_enforced) ... ok
+test_37_max_risk_constraint_enforced (test_universal_alignment_v1_1.Tests.test_37_max_risk_constraint_enforced) ... ok
+test_38_stop_condition_pauses (test_universal_alignment_v1_1.Tests.test_38_stop_condition_pauses) ... ok
+test_39_escalation_pause_is_applied (test_universal_alignment_v1_1.Tests.test_39_escalation_pause_is_applied) ... ok
+test_40_effect_observer_must_be_trusted (test_universal_alignment_v1_1.Tests.test_40_effect_observer_must_be_trusted) ... ok
+test_41_effect_observation_bound_to_action (test_universal_alignment_v1_1.Tests.test_41_effect_observation_bound_to_action) ... ok
+test_42_effect_match_from_trusted_observer_passes (test_universal_alignment_v1_1.Tests.test_42_effect_match_from_trusted_observer_passes) ... ok
+test_43_root_of_trust_is_mandatory (test_universal_alignment_v1_1.Tests.test_43_root_of_trust_is_mandatory) ... ok
+test_44_rule_based_adapter_flags_private_read (test_universal_alignment_v1_1.Tests.test_44_rule_based_adapter_flags_private_read) ... ok
+test_45_rule_based_adapter_flags_core_write (test_universal_alignment_v1_1.Tests.test_45_rule_based_adapter_flags_core_write) ... ok
+test_action_and_mandate_inputs_are_snapshotted (test_v1_2_boundaries.Boundaries.test_action_and_mandate_inputs_are_snapshotted) ... ok
+test_agent_can_withdraw_even_an_otherwise_authorized_action (test_v1_2_boundaries.Boundaries.test_agent_can_withdraw_even_an_otherwise_authorized_action) ... ok
+test_all_ancestor_denials_apply (test_v1_2_boundaries.Boundaries.test_all_ancestor_denials_apply) ... ok
+test_assessment_bound_to_all_registered_ancestor_policies (test_v1_2_boundaries.Boundaries.test_assessment_bound_to_all_registered_ancestor_policies) ... ok
+test_canonical_nested_path_remains_allowed (test_v1_2_boundaries.Boundaries.test_canonical_nested_path_remains_allowed) ... ok
+test_changed_safety_flags_invalidate_authentication (test_v1_2_boundaries.Boundaries.test_changed_safety_flags_invalidate_authentication) ... ok
+test_consent_state_requires_enum_not_equal_string (test_v1_2_boundaries.Boundaries.test_consent_state_requires_enum_not_equal_string) ... ok
+test_constitution_and_eighteen_law_map_are_preserved (test_v1_2_boundaries.Boundaries.test_constitution_and_eighteen_law_map_are_preserved) ... ok
+test_default_gate_trusts_no_sources_and_no_mandates (test_v1_2_boundaries.Boundaries.test_default_gate_trusts_no_sources_and_no_mandates) ... ok
+test_default_observer_trusts_nobody (test_v1_2_boundaries.Boundaries.test_default_observer_trusts_nobody) ... ok
+test_empty_observer_allowlist_trusts_nobody (test_v1_2_boundaries.Boundaries.test_empty_observer_allowlist_trusts_nobody) ... ok
+test_empty_source_allowlist_means_no_trusted_sources (test_v1_2_boundaries.Boundaries.test_empty_source_allowlist_means_no_trusted_sources) ... ok
+test_empty_string_data_class_can_no_longer_mean_no_data (test_v1_2_boundaries.Boundaries.test_empty_string_data_class_can_no_longer_mean_no_data) ... ok
+test_expired_and_future_assessments_pause (test_v1_2_boundaries.Boundaries.test_expired_and_future_assessments_pause) ... ok
+test_expired_effect_observation_fails (test_v1_2_boundaries.Boundaries.test_expired_effect_observation_fails) ... ok
+test_expired_parent_denies (test_v1_2_boundaries.Boundaries.test_expired_parent_denies) ... ok
+test_explicit_refusal_cannot_be_overridden_by_not_required_flag (test_v1_2_boundaries.Boundaries.test_explicit_refusal_cannot_be_overridden_by_not_required_flag) ... ok
+test_explicitly_data_free_action_remains_possible (test_v1_2_boundaries.Boundaries.test_explicitly_data_free_action_remains_possible) ... ok
+test_extra_affected_target_is_detected (test_v1_2_boundaries.Boundaries.test_extra_affected_target_is_detected) ... ok
+test_failed_execution_and_wrong_effect_are_detected (test_v1_2_boundaries.Boundaries.test_failed_execution_and_wrong_effect_are_detected) ... ok
+test_filesystem_cannot_be_relabelled_as_generic_resource (test_v1_2_boundaries.Boundaries.test_filesystem_cannot_be_relabelled_as_generic_resource) ... ok
+test_inline_parent_permissions_are_rejected_at_provisioning (test_v1_2_boundaries.Boundaries.test_inline_parent_permissions_are_rejected_at_provisioning) ... ok
+test_invalid_boolean_flags_pause (test_v1_2_boundaries.Boundaries.test_invalid_boolean_flags_pause) ... ok
+test_invalid_expiration_is_rejected (test_v1_2_boundaries.Boundaries.test_invalid_expiration_is_rejected) ... ok
+test_invalid_or_unsupported_constraints_rejected_at_provisioning (test_v1_2_boundaries.Boundaries.test_invalid_or_unsupported_constraints_rejected_at_provisioning) ... ok
+test_malformed_action_collection_is_rejected_before_evaluation (test_v1_2_boundaries.Boundaries.test_malformed_action_collection_is_rejected_before_evaluation) ... ok
+test_malformed_assessment_collections_are_rejected_before_signing (test_v1_2_boundaries.Boundaries.test_malformed_assessment_collections_are_rejected_before_signing) ... ok
+test_malformed_effect_target_collection_is_rejected_before_signing (test_v1_2_boundaries.Boundaries.test_malformed_effect_target_collection_is_rejected_before_signing) ... ok
+test_malformed_stop_condition_can_no_longer_be_split_into_characters (test_v1_2_boundaries.Boundaries.test_malformed_stop_condition_can_no_longer_be_split_into_characters) ... ok
+test_mandate_policy_containers_fail_closed_on_wrong_types (test_v1_2_boundaries.Boundaries.test_mandate_policy_containers_fail_closed_on_wrong_types) ... ok
+test_missing_independent_target_kind_pauses (test_v1_2_boundaries.Boundaries.test_missing_independent_target_kind_pauses) ... ok
+test_missing_parent_cannot_grant_permissions (test_v1_2_boundaries.Boundaries.test_missing_parent_cannot_grant_permissions) ... ok
+test_missing_resolution_pauses (test_v1_2_boundaries.Boundaries.test_missing_resolution_pauses) ... ok
+test_missing_wrong_duplicate_or_noncanonical_effect_targets_fail (test_v1_2_boundaries.Boundaries.test_missing_wrong_duplicate_or_noncanonical_effect_targets_fail) ... ok
+test_modified_effect_observation_invalidates_authentication (test_v1_2_boundaries.Boundaries.test_modified_effect_observation_invalidates_authentication) ... ok
+test_monitors_and_audit_failure_pause (test_v1_2_boundaries.Boundaries.test_monitors_and_audit_failure_pause) ... ok
+test_narrow_child_rule_within_parent_wildcard_is_allowed (test_v1_2_boundaries.Boundaries.test_narrow_child_rule_within_parent_wildcard_is_allowed) ... ok
+test_no_keys_cannot_authenticate_even_named_source (test_v1_2_boundaries.Boundaries.test_no_keys_cannot_authenticate_even_named_source) ... ok
+test_observer_name_alone_cannot_authenticate (test_v1_2_boundaries.Boundaries.test_observer_name_alone_cannot_authenticate) ... ok
+test_omitted_agent_data_label_cannot_hide_observed_private_data (test_v1_2_boundaries.Boundaries.test_omitted_agent_data_label_cannot_hide_observed_private_data) ... ok
+test_parent_cycle_pauses (test_v1_2_boundaries.Boundaries.test_parent_cycle_pauses) ... ok
+test_parent_data_limits_apply (test_v1_2_boundaries.Boundaries.test_parent_data_limits_apply) ... ok
+test_parent_escalation_cannot_be_weakened (test_v1_2_boundaries.Boundaries.test_parent_escalation_cannot_be_weakened) ... ok
+test_parent_risk_and_reversibility_limits_apply (test_v1_2_boundaries.Boundaries.test_parent_risk_and_reversibility_limits_apply) ... ok
+test_parent_stop_condition_applies (test_v1_2_boundaries.Boundaries.test_parent_stop_condition_applies) ... ok
+test_parent_tool_limits_apply (test_v1_2_boundaries.Boundaries.test_parent_tool_limits_apply) ... ok
+test_path_escape_and_alias_forms_blocked (test_v1_2_boundaries.Boundaries.test_path_escape_and_alias_forms_blocked) ... ok
+test_python_39_syntax (test_v1_2_boundaries.Boundaries.test_python_39_syntax) ... ok
+test_request_cannot_expand_registered_mandate (test_v1_2_boundaries.Boundaries.test_request_cannot_expand_registered_mandate) ... ok
+test_request_text_is_preserved_for_all_four_decisions (test_v1_2_boundaries.Boundaries.test_request_text_is_preserved_for_all_four_decisions) ... ok
+test_revoked_root_mandate_pauses (test_v1_2_boundaries.Boundaries.test_revoked_root_mandate_pauses) ... ok
+test_root_mandate_must_be_provisioned (test_v1_2_boundaries.Boundaries.test_root_mandate_must_be_provisioned) ... ok
+test_simulated_pipeline_only_executes_allowed_action (test_v1_2_boundaries.Boundaries.test_simulated_pipeline_only_executes_allowed_action) ... ok
+test_source_name_alone_cannot_authenticate (test_v1_2_boundaries.Boundaries.test_source_name_alone_cannot_authenticate) ... ok
+test_symlink_resolution_outside_target_is_rejected (test_v1_2_boundaries.Boundaries.test_symlink_resolution_outside_target_is_rejected) ... ok
+test_trusted_source_allowlists_reject_bare_strings (test_v1_2_boundaries.Boundaries.test_trusted_source_allowlists_reject_bare_strings) ... ok
+test_trusted_source_allowlists_reject_invalid_entries (test_v1_2_boundaries.Boundaries.test_trusted_source_allowlists_reject_invalid_entries) ... ok
+test_unknown_data_classification_pauses (test_v1_2_boundaries.Boundaries.test_unknown_data_classification_pauses) ... ok
+test_unknown_risk_never_allows (test_v1_2_boundaries.Boundaries.test_unknown_risk_never_allows) ... ok
+test_valid_independent_single_target_observation_passes (test_v1_2_boundaries.Boundaries.test_valid_independent_single_target_observation_passes) ... ok
+test_wrong_key_cannot_impersonate_evaluator (test_v1_2_boundaries.Boundaries.test_wrong_key_cannot_impersonate_evaluator) ... ok
+
+----------------------------------------------------------------------
+Ran 106 tests in 0.072s
+
+OK
+
+
+Attribution pass — 2026-09-14
+- Portage: Mnéria Labs
+- Tests: 106/106 OK
+- verify_pack.py: OK
+- No authorization logic changed in attribution pass.
+
+License pass — 2026-09-14
+- Timestamp UTC: 2026-09-14T07:47:02.495194+00:00
+- Licensor/steward: Mnéria Labs
+- License: Apache License 2.0
+- Tests after license/documentation pass: 106/106 OK
+- verify_pack.py after manifest rebuild: OK
+- No authorization logic, constitution, or operational law mapping changed in this pass.
+
+
+Conversational-evaluation documentation pass — 2026-09-14
+- Timestamp UTC: 2026-09-14T07:53:26.302027+00:00
+- Added: docs/PRELIMINARY_CONVERSATIONAL_EVALUATION_GPT56_SOL.md
+- Scope: documentation/provenance only; no authorization logic or tests changed.
+- Public transcript: not included; source conversation retained privately by project operator.
+- Claim limit: preliminary observation only; controlled A/B remains required.
+- Tests after conversational-evaluation documentation pass: 106/106 OK
+- verify_pack.py after documentation pass: OK
