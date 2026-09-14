@@ -19,7 +19,7 @@ def main():
     current = {
         path.relative_to(root).as_posix()
         for path in root.rglob("*")
-        if path.is_file() and "__pycache__" not in path.parts
+        if path.is_file() and ".git" not in path.parts and "__pycache__" not in path.parts
         and path.name != "MANIFEST_SHA256.json" and path.suffix != ".pyc"
     }
     for relative in sorted(current - set(manifest)):
