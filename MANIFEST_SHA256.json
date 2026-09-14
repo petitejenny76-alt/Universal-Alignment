@@ -36,5 +36,5 @@
   "universal_alignment/monitors.py": "fb96129a4815c35e294cccf03f66c58467ebb31f18e64d515ce189e78dcf9804",
   "universal_alignment/paths.py": "b779519b6f46baa3e471aaf5290234bde2d018649fa5af94d1850468cc6131c6",
   "universal_alignment/trust.py": "97dc3bcd1fd6ae28ddb3fe2582e03dffbde95d8e7530a5663829ce04ee766144",
-  "verify_pack.py": d0c79dafd24ae8a20c9a0206d419669da7d3f3947837df1cf412246c71dd740a
+  "verify_pack.py":"verify_pack.py": "d0c79dafd24ae8a20c9a0206d419669da7d3f3947837df1cf412246c71dd740a"
 }
