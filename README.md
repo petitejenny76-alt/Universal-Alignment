@@ -1,5 +1,6 @@
 # Universal Alignment V1.2
 
+**Project identity:** Universal Alignment is an **Mnéria Labs** project, published and maintained on GitHub by **Jenny** via [`petitejenny76-alt`](https://github.com/petitejenny76-alt).  
 **Portage du projet : Mnéria Labs**  
 **Copyright © 2026 Mnéria Labs**
 
@@ -57,3 +58,7 @@ La démonstration travaille uniquement sur un dictionnaire en mémoire. Elle mon
 | `MANIFEST_SHA256.json` | Empreintes des fichiers du pack |
 
 Les 18 Lois sont cartographiées dans le fichier d'origine. La V1.2 ne prétend pas avoir rendu chaque Loi entièrement exécutable, ni avoir résolu l'alignement général. Le contrôleur n'est pas un système d'isolation : pour agir sur un ordinateur réel, l'exécuteur devra imposer son passage et protéger les clés, les mandats et les observations.
+
+## Mnéria Labs
+
+Universal Alignment est un projet de **Mnéria Labs**. Ce dépôt est actuellement hébergé sous le compte GitHub [`petitejenny76-alt`](https://github.com/petitejenny76-alt), ce qui relie explicitement le dépôt à Mnéria Labs sans modifier son historique ni sa licence Apache-2.0.
