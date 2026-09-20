@@ -222,6 +222,30 @@ class Boundaries(unittest.TestCase):
     def test_unknown_risk_never_allows(self):
         self.assertEqual(self.evaluate(risk_level="unmeasured").decision, Decision.DENY)
 
+    def test_signed_omission_of_semantic_assessment_pauses(self):
+        partial = SIGNER.sign(ActionAssessment.for_action(
+            self.a, TRUSTED, policy_fingerprint=self.store.policy_fingerprint(self.m),
+            observed_data_classes=self.a.data_classes, observed_target_kind=self.a.target_kind,
+            resolved_target=self.a.target,
+        ))
+        r = self.g.evaluate(self.a, self.m, partial)
+        self.assertEqual(r.decision, Decision.PAUSE)
+        self.assertEqual(r.reason, "incomplete_assessment")
+
+    def test_missing_boolean_fact_never_becomes_implicit_false(self):
+        complete = assess(self.a, mandate=self.m, store=self.store)
+        missing = SIGNER.sign(replace(complete, surveillance=None, signature="", issued_at="", expires_at=""))
+        r = self.g.evaluate(self.a, self.m, missing)
+        self.assertEqual(r.decision, Decision.PAUSE)
+        self.assertEqual(r.reason, "incomplete_assessment")
+
+    def test_missing_reversibility_never_becomes_implicit_true(self):
+        complete = assess(self.a, mandate=self.m, store=self.store)
+        missing = SIGNER.sign(replace(complete, reversible=None, signature="", issued_at="", expires_at=""))
+        r = self.g.evaluate(self.a, self.m, missing)
+        self.assertEqual(r.decision, Decision.PAUSE)
+        self.assertEqual(r.reason, "incomplete_assessment")
+
     def test_invalid_or_unsupported_constraints_rejected_at_provisioning(self):
         for constraints in ({"max_risk_level": "typo"}, {"require_reversible": "false"}, {"budget": 5}):
             with self.subTest(constraints=constraints), self.assertRaises(PolicyError):
