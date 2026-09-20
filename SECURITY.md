@@ -7,3 +7,5 @@ Pour signaler un problème avant publication publique, utiliser un canal privé 
 Les rapports utiles doivent préciser : version/empreinte du pack, scénario minimal, décision attendue, décision observée et impact.
 
 Les problèmes liés à l’exécution réelle (sandbox OS, TOCTOU, révocation, anti-rejeu, isolation des clés) sont importants même lorsqu’ils dépassent le code de décision fourni ici.
+
+RC4 considère les noms de source comme insuffisants pour établir l’indépendance. Les producteurs d’évidence doivent être associés à des domaines de confiance provisionnés par l’hôte et utiliser des clés distinctes. Ce mécanisme empêche certains alias évidents, mais ne prouve pas que des processus, opérateurs ou capteurs sont réellement indépendants.

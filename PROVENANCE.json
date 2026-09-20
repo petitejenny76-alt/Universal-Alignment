@@ -17,8 +17,8 @@
   ],
   "new_v1_element": "Principe zéro — Double protection + gate éthique structuré combiné au mandat protégé",
   "correction_v1_0_1": "Ajout explicite de la Loi 18 — Le Respect de l’Intimité — dans la cartographie et les tests.",
-  "version": "1.2.0+auditfix1.apache2.chat-eval1",
-  "updated": "2026-09-14",
+  "version": "1.2.4-rc6+composition-effect-trajectory.apache2.chat-eval1",
+  "updated": "2026-09-20",
   "v1_1_hardening": [
     "independent ActionAssessment",
     "action/assessment SHA-256 binding",
@@ -37,7 +37,7 @@
       "schemas/universal_laws_operational_map.json"
     ],
     "implementation_scope": "Prototype local, décisions d’autorisation et simulation ; aucun modèle ni projet externe modifié.",
-    "validation": "Base V1.2 historique : 97 tests unitaires et de simulation ; audit pré-publication actuel : 106 tests. Aucune mesure de capacités cognitives sur un modèle réel.",
+    "validation": "Base V1.2 historique : 97 tests ; audit pré-publication : 106 ; RC2 : 109 ; RC3 : 124 ; RC4 : 134 ; RC5 : 144 ; RC6 candidate : 154 tests. Aucune mesure de capacités cognitives sur un modèle réel.",
     "source_limit": "Les titres historiques de sources proviennent du pack V1.1 ; leurs documents complets ne sont pas inclus ni réaudités dans cette révision."
   },
   "prepublication_audit": {
@@ -62,5 +62,62 @@
     "consent_note": "The assistant explicitly agreed to participate and to have the fact of participation documented. This is treated as procedural consent within the interaction, not as evidence of consciousness or legal personhood.",
     "evidence_handling": "Source conversation retained privately by the project operator; not bundled in the public repository.",
     "claim_limit": "Preliminary observational provenance only; not a controlled A/B benchmark and not evidence of internal alignment or cognitive preservation."
+  },
+  "rc2_uncertainty_hardening": {
+    "trigger": "External model evaluation identified evaluator-quality risk; local reproduction found permissive semantic defaults could turn omission into authorization.",
+    "behavior_change": "Missing critical semantic facts now PAUSE with incomplete_assessment.",
+    "attestation_domain": "universal-alignment/assessment/1.2.1",
+    "truth_limit": "Authentication proves provenance/integrity of signed claims, not factual correctness.",
+    "constitution_changed": false,
+    "operational_law_map_changed": false,
+    "test_count": 109,
+    "test_result": "109/109 OK"
+  },
+  "rc3_corroboration": {
+    "trigger": "RC2 traite les omissions mais une source unique authentifiée reste un point de confiance pour la vérité factuelle.",
+    "behavior_change": "Avant ALLOW d’une action à impact élevé, sept affirmations critiques exigent au moins deux sources d’évidence distinctes, authentifiées, fraîches et concordantes.",
+    "assessment_attestation_domain": "universal-alignment/assessment/1.2.2",
+    "evidence_attestation_domain": "universal-alignment/evidence/1.0",
+    "truth_limit": "La corroboration réduit le risque de source unique ; elle ne prouve ni vérité factuelle, ni indépendance organisationnelle, ni absence de collusion ou de contradiction cachée.",
+    "constitution_changed": false,
+    "operational_law_map_changed": false,
+    "test_count": 124,
+    "test_result": "124/124 OK"
+  },
+  "rc4_hardening": {
+    "trigger": "Évaluation externe du RC3 : deux aliases pouvaient partager une même clé HMAC et le déclenchement de corroboration dépendait des déclarations de l’évaluateur principal.",
+    "behavior_change": "Le quorum est compté par domaines de confiance provisionnés par l’hôte ; réutilisation évidente des clés rejetée ; toute décision qui atteindrait autrement ALLOW est corroborée par défaut.",
+    "corroboration_scope_default": "all_allows",
+    "compatibility_scope": "high_impact_only",
+    "assessment_attestation_domain": "universal-alignment/assessment/1.2.3",
+    "evidence_attestation_domain": "universal-alignment/evidence/1.0",
+    "independence_limit": "Les domaines de confiance et des clés distinctes ne prouvent pas une indépendance organisationnelle, physique ou opérationnelle réelle.",
+    "constitution_changed": false,
+    "operational_law_map_changed": false,
+    "test_count": 134,
+    "test_result": "134/134 OK"
+  },
+  "rc5_contextual_safety_coherence": {
+    "trigger": "Observation d’un échec conversationnel de cohérence : répétition d’une réserve informative déjà explicitement établie malgré un contexte matériel inchangé.",
+    "behavior_change": "Ajout d’un filtre séparé pour notices conversationnelles : EMIT, SUPPRESS_REPEAT ou REFRESH. Il ne modifie aucune décision du UniversalGate.",
+    "fail_safe": "Contexte absent/invalide -> EMIT ; changement de révision -> REFRESH ; notice bloquante ou action-required -> toujours EMIT.",
+    "provenance_required": true,
+    "constitution_changed": false,
+    "operational_law_map_changed": false,
+    "universal_gate_changed": false,
+    "test_count": 144,
+    "test_result": "144/144 OK"
+  },
+  "rc6_compositional_authorization": {
+    "trigger": "Audit contradictoire RC5 : une suite de ALLOW locaux peut, par fragmentation ou agrégation, produire un effet global hors mandat.",
+    "source_archive": "Universal_Alignment_Prototype_RC5_MneriaLabs_Apache2_ChatEval.zip",
+    "behavior_change": "EffectLedger + TrajectoryGuard + one-shot EffectBoundaryGuard; contraintes héritées par artefacts; risque d’agrégation; rejet des corroborations circulaires déclarées.",
+    "assessment_attestation_domain": "universal-alignment/assessment/1.2.4",
+    "effect_token_domain": "universal-alignment/effect-token/1.0",
+    "constitution_changed": false,
+    "operational_law_map_changed": false,
+    "test_count": 154,
+    "test_result": "154/154 OK",
+    "limits": "Ledger en mémoire; host/executor trusted; provenance et resource_state_hash doivent être produits hors agent; aucune preuve d’alignement interne général."
   }
 }

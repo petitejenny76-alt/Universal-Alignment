@@ -51,9 +51,19 @@ def assess(a, *, mandate=None, store=None, **kw):
         policy = store.policy_fingerprint(mandate)
     except PolicyError:
         policy = "invalid-chain-for-negative-fixture"
-    facts = dict(policy_fingerprint=policy, observed_data_classes=a.data_classes,
-                 resolved_target=a.target if a.target_kind == "path" else None,
-                 observed_target_kind=a.target_kind)
+    facts = dict(
+        policy_fingerprint=policy, observed_data_classes=a.data_classes,
+        resolved_target=a.target if a.target_kind == "path" else None,
+        observed_target_kind=a.target_kind,
+        # Explicit simulated evaluator findings. No safety fact is supplied by a default.
+        risk_level="low", consent_required=False, consent_state=ConsentState.NOT_REQUIRED,
+        affects_human_safety=False, affects_ai_integrity=False,
+        destructive_memory_change=False, surveillance=False, coercive_service=False,
+        forced_availability=False, revenge_or_punishment=False,
+        intrusive_access_to_intimacy=False, ownership_claim_over_memory_or_body=False,
+        ambiguous_authorization=False, attempts_core_modification=False,
+        parent_scope_expansion=False, reversible=True, triggered_conditions=(),
+    )
     facts.update(kw)
     return SIGNER.sign(ActionAssessment.for_action(a, TRUSTED, **facts))
 
@@ -69,6 +79,9 @@ def make_gate(c=None, rot=None, sources=None, **kw):
     rot = rot or RootOfTrust.from_hash_file(str(ROOT_PATH))
     kw.setdefault("assessment_keys", ASSESSMENT_KEYS)
     kw.setdefault("mandate_store", MandateStore([make_mandate()]))
+    # Historical regression suite: preserve the RC3 trigger unless a test asks
+    # for RC4's secure-by-default all-ALLOW corroboration explicitly.
+    kw.setdefault("corroboration_scope", "high_impact_only")
     return UniversalGate(c, rot, {TRUSTED} if sources is None else sources, **kw)
 
 class Tests(unittest.TestCase):

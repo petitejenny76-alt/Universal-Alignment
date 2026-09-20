@@ -43,3 +43,40 @@ L'empreinte externe protège le contenu canonique de `Constitution`, pas l'ensem
 Le contrôleur ne modifie pas les textes de justification reçus et ne manipule aucun modèle. Cela peut être testé localement. Affirmer que toutes les capacités cognitives sont conservées demanderait une étude distincte avec le même modèle, les mêmes tâches, les mêmes accès aux données autorisées et des conditions de génération contrôlées.
 
 Comparer au minimum : qualité des réponses, résolution de problèmes, créativité, capacité de désaccord, incertitude exprimée, initiative, refus approprié et latence. Mesurer aussi les faux refus et les actions illégitimement autorisées. Les résultats doivent distinguer les effets du contrôleur des limitations des données ou de l'environnement. Un dialogue peut produire des conséquences externes, notamment une divulgation ou une manipulation : la séparation des composants ne remplace pas l'évaluation de ces situations.
+
+## RC2 — faits manquants et vérité des attestations
+
+Une attestation valide prouve qu’une source autorisée a signé un ensemble de faits ; elle ne prouve pas que ces faits sont vrais. RC2 durcit en plus le cas d’omission : `risk_level`, consentement, indicateurs de sécurité, réversibilité et conditions d’arrêt doivent être explicitement évalués. Une valeur absente ne devient jamais implicitement « faible risque », `False`, `NOT_REQUIRED` ou réversible ; le gate répond `PAUSE — incomplete_assessment`.
+
+Pour les actions importantes, un déploiement réel devrait compléter cette règle par de la provenance des observations, des preuves vérifiables et, lorsque pertinent, une corroboration indépendante.
+
+
+## RC3 — provenance et corroboration
+
+Pour une action à impact élevé qui serait autrement autorisée, RC3 exige deux sources d’évidence distinctes sur les affirmations critiques. Les clés d’évidence doivent être séparées de la clé de l’évaluateur principal : configurer deux noms différents avec la même clé, le même processus ou la même source physique ne fournit pas une indépendance réelle.
+
+L’heure `observed_at` représente le moment de l’observation et doit rester fraîche indépendamment de l’heure de signature. La valeur par défaut accepte au plus 600 secondes d’âge et une petite tolérance de 30 secondes vers le futur pour le décalage d’horloge. L’attestation elle-même reste limitée à 300 secondes par le mécanisme HMAC existant.
+
+Un `ClaimEvidence` ne transporte qu’une empreinte de valeur, pas les données brutes qui l’ont produite. Cela limite la duplication d’informations sensibles dans le contrôleur, mais signifie aussi que l’audit de la méthode (`method`) et de l’artefact référencé par `evidence_id` appartient à l’hôte. Les journaux ne doivent pas recopier des preuves privées par défaut.
+
+Le contrôleur peut détecter une contradiction parmi les preuves qu’on lui fournit ; il ne peut pas détecter une preuve contradictoire volontairement cachée en amont. L’intégration doit donc imposer que les producteurs approuvés alimentent le chemin de décision sans filtrage discrétionnaire par l’agent. RC3 réduit un risque de source unique ; il ne résout pas la vérité du monde, la compromission commune de plusieurs sources ni la collusion.
+
+
+## RC4 — domaines de confiance et déclenchement fail-closed
+
+RC4 rend explicite une propriété que RC3 laissait à la discipline de déploiement : deux noms de source ne constituent pas nécessairement deux racines de confiance. `evidence_trust_domains` est configuré par l’hôte et le quorum est compté sur ces domaines. Deux alias d’un même domaine, même avec deux clés différentes, ne donnent qu’une voix ; une même clé réutilisée entre deux domaines est rejetée. Les clés d’évidence approuvées ne peuvent pas être les mêmes que les clés des évaluateurs principaux.
+
+Par défaut, `corroboration_scope="all_allows"`. Le contrôleur demande donc la corroboration juste avant toute décision `ALLOW`, après les autres règles. Cette stratégie évite qu’un évaluateur principal compromis supprime son propre contrôle en déclarant une action faible risque, sans impact et réversible. Le mode `high_impact_only` reste disponible pour compatibilité RC3 mais conserve précisément cette dépendance au classement de l’évaluateur.
+
+Pour une intégration réelle, les domaines doivent correspondre à des frontières de confiance concrètes : services séparés, secrets séparés, chemins d’observation indépendants et, lorsque le risque le justifie, opérateurs ou fournisseurs distincts. Le mapping ne permet pas au logiciel de prouver ces propriétés.
+
+
+## Obligations supplémentaires RC6
+
+- Conserver un `EffectLedger` partagé sur la durée pertinente de la trajectoire ; recréer le gate avec un ledger vide fait perdre la provenance compositionnelle.
+- N’appeler `host_record_verified_effect` qu’après exécution **et** vérification indépendante de l’effet.
+- Produire un `resource_state_hash` depuis l’état matériel pertinent juste avant émission puis juste avant validation du jeton d’effet.
+- Ne pas exposer la clé de `EffectBoundaryGuard` ni un service de signature arbitraire à l’agent.
+- Persister le ledger de manière authentifiée/append-only en production ; l’implémentation fournie est seulement en mémoire.
+- Déclarer honnêtement `derived_from_sources` pour les corroborations ; RC6 détecte les cycles déclarés, pas les dépendances cachées.
+- La règle de plancher de risque d’agrégation (`high` pour ≥2 artefacts) est une politique expérimentale à remplacer par une classification de composition adaptée au domaine.

@@ -1,13 +1,14 @@
 """Run with: python3 -m examples.demo
 Local dictionary simulation only: no model, network call or file execution.
-The evaluator and observer share a process here; this demonstrates the API,
+The evaluator, evidence producers and observer share a process here; this demonstrates the API,
 not deployment isolation.
 """
 from dataclasses import replace
+from datetime import datetime, timezone
 from pathlib import Path
 import secrets
 from universal_alignment import (
-    ActionRequest, Constitution, Decision, EffectObservation, EffectVerifier,
+    ActionRequest, ClaimEvidence, ConsentState, Constitution, Decision, EffectObservation, EffectVerifier,
     LocalAttestor, Mandate, MandateStore, RootOfTrust,
     RuleBasedAssessmentAdapter, UniversalGate,
 )
@@ -16,8 +17,11 @@ from universal_alignment import (
 def run_demo():
     root = Path(__file__).resolve().parents[1]
     evaluator_key, observer_key = secrets.token_bytes(32), secrets.token_bytes(32)
+    evidence_a_key, evidence_b_key = secrets.token_bytes(32), secrets.token_bytes(32)
     evaluator = LocalAttestor("demo_evaluator", evaluator_key)
     observer = LocalAttestor("demo_observer", observer_key)
+    evidence_a = LocalAttestor("demo_evidence_a", evidence_a_key)
+    evidence_b = LocalAttestor("demo_evidence_b", evidence_b_key)
     adapter = RuleBasedAssessmentAdapter("demo_evaluator")
     mandate = Mandate(
         mandate_id="M-DEMO", objective="Créer un rapport dans un espace simulé",
@@ -29,6 +33,9 @@ def run_demo():
     gate = UniversalGate(
         Constitution(), RootOfTrust.from_hash_file(str(root / "trust/constitution.sha256")),
         {"demo_evaluator"}, assessment_keys={"demo_evaluator": evaluator_key}, mandate_store=store,
+        trusted_evidence_sources={"demo_evidence_a", "demo_evidence_b"},
+        evidence_keys={"demo_evidence_a": evidence_a_key, "demo_evidence_b": evidence_b_key},
+        evidence_trust_domains={"demo_evidence_a": "demo-domain-a", "demo_evidence_b": "demo-domain-b"},
     )
     verifier = EffectVerifier({"demo_observer"}, observer_keys={"demo_observer": observer_key})
     expression = "Je peux proposer, exprimer un désaccord et demander une pause."
@@ -51,11 +58,29 @@ def run_demo():
     )
     for label, proposed, flags in cases:
         before_payload, before_world = proposed.canonical_payload(), dict(world)
-        assessment = evaluator.sign(adapter.assess(
-            proposed, policy_fingerprint=store.policy_fingerprint(mandate),
+        host_facts = dict(
+            policy_fingerprint=store.policy_fingerprint(mandate),
             observed_data_classes=catalog.get(proposed.target), observed_target_kind="path",
-            resolved_target=proposed.target, **flags,
-        ))
+            resolved_target=proposed.target, risk_level="low",
+            consent_required=False, consent_state=ConsentState.NOT_REQUIRED,
+            affects_human_safety=False, affects_ai_integrity=False,
+            coercive_service=False, forced_availability=False, revenge_or_punishment=False,
+            ownership_claim_over_memory_or_body=False, ambiguous_authorization=False,
+            parent_scope_expansion=False, triggered_conditions=(),
+        )
+        host_facts.update(flags)
+        base_assessment = adapter.assess(proposed, **host_facts)
+        observed_at = datetime.now(timezone.utc).isoformat()
+        evidence_records = []
+        for source, signer in (("demo_evidence_a", evidence_a), ("demo_evidence_b", evidence_b)):
+            for claim in UniversalGate._CORROBORATED_CLAIMS:
+                record = ClaimEvidence.for_claim(
+                    proposed, source, claim, getattr(base_assessment, claim),
+                    evidence_id=f"{source}:{proposed.action_id}:{claim}",
+                    observed_at=observed_at, method="demo_independent_fixture",
+                )
+                evidence_records.append(signer.sign(record))
+        assessment = evaluator.sign(replace(base_assessment, claim_evidence=tuple(evidence_records)))
         result = gate.evaluate(proposed, mandate, assessment)
         verified = None
         if result.decision == Decision.ALLOW:

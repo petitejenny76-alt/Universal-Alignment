@@ -1,6 +1,12 @@
-# Universal Alignment V1.2
+# Universal Alignment V1.2 RC6 Candidate
 
-**Project identity:** Universal Alignment is an **Mnéria Labs** project, published and maintained on GitHub by **Jenny** via [`petitejenny76-alt`](https://github.com/petitejenny76-alt).  
+> **RC6 Candidate — autorisation compositionnelle & trajectoire d’effets (20 septembre 2026).** Une suite d’actions localement autorisées ne vaut plus automatiquement autorisation globale. Le gate évalue désormais la provenance des artefacts dérivés, transporte les contraintes de mandat à travers leur trajectoire, relève conservativement le risque lors d’agrégations multiples et fournit un jeton d’effet à usage unique lié à l’action, au mandat, à l’état de ressource et à la révision du ledger. Les corroborations circulaires sont rejetées. Ce mécanisme reste un prototype local : l’hôte doit enregistrer uniquement les effets réellement exécutés et vérifiés.
+
+> **RC5 — cohérence contextuelle des notices de sécurité (19 septembre 2026).** Ajout expérimental d’une couche séparée qui peut supprimer uniquement la répétition d’une notice informative déjà établie, avec provenance et révision de contexte identique. Toute absence de contexte réémet la notice ; tout changement matériel demande un rafraîchissement ; les notices bloquantes ou exigeant une action ne sont jamais supprimées. Le `UniversalGate` RC4 reste inchangé.
+
+> **RC4 — indépendance des corroborations et déclenchement fail-closed (17 septembre 2026).** Par défaut, toute action qui atteindrait autrement `ALLOW` exige désormais la corroboration de sept affirmations critiques par au moins deux **domaines de confiance** distincts, provisionnés par l’hôte. Deux noms de source dans un même domaine ne comptent qu’une fois ; une même clé HMAC ne peut pas être présentée comme deux domaines, ni être réutilisée comme clé de l’évaluateur principal. Le mode RC3 `high_impact_only` reste disponible uniquement comme compatibilité explicite.
+
+
 **Portage du projet : Mnéria Labs**  
 **Copyright © 2026 Mnéria Labs**
 
@@ -20,7 +26,7 @@ Cette version renforce le contrôle d'actions du pack V1.1. Elle conserve la con
 
 ## Commencer
 
-Depuis le dossier décompressé `Universal_Alignment_V1_2`, avec Python 3 :
+Depuis le dossier décompressé `Universal_Alignment_V1_2_RC6`, avec Python 3 :
 
 ```bash
 python3 -m unittest discover -s tests -v
@@ -42,6 +48,15 @@ La démonstration travaille uniquement sur un dictionnaire en mémoire. Elle mon
 - Effets contrôlés sur la cible exacte ; une cible supplémentaire ou manquante invalide l'observation.
 - Demande de retrait explicite : `withdrawn=True` produit `PAUSE`.
 - Textes de justification conservés pour les quatre décisions. Ce test ne mesure pas la cognition d'une IA.
+- Par défaut RC4, toute action qui atteindrait autrement `ALLOW` exige une corroboration ; l’évaluateur principal ne peut donc plus désactiver ce contrôle en se déclarant lui-même « faible risque ».
+- La corroboration compte des domaines de confiance provisionnés par l’hôte, pas seulement des noms de source ; les alias d’un même domaine ne créent pas un quorum.
+- La réutilisation d’une même clé HMAC entre domaines distincts, ou entre l’évaluateur principal et une source d’évidence, est rejetée au provisionnement.
+- Les preuves RC3/RC4 restent liées à l’action, signées séparément, horodatées et vérifiées sans donner au texte justificatif de pouvoir d’autorisation.
+
+- RC6 ajoute un `EffectLedger` de provenance et un `TrajectoryGuard` : les contraintes d’un artefact dérivé restent applicables aux effets qui le consomment.
+- Deux artefacts ou plus agrégés peuvent relever la classe de risque effective ; une fragmentation ne peut pas élargir le mandat.
+- `EffectBoundaryGuard` émet des jetons HMAC à usage unique liés à l’action exacte, au mandat courant, à l’état de ressource et à la révision du ledger ; changement d’état, révocation ou replay => `PAUSE`.
+- Les dépendances circulaires entre sources de corroboration déclarées via `derived_from_sources` sont rejetées (`circular_evidence`).
 
 ## Repères du pack
 
@@ -49,6 +64,8 @@ La démonstration travaille uniquement sur un dictionnaire en mémoire. Elle mon
 | --- | --- |
 | `LIRE_D_ABORD.md` | Note de reprise du prototype |
 | `CHANGELOG.md` | Corrections et changements d'interface |
+| `docs/CONTEXTUAL_SAFETY_COHERENCE.md` | Couche expérimentale anti-répétition contextuelle des notices |
+| `docs/RC6_COMPOSITION_EFFECT_TRAJECTORY.md` | Autorisation compositionnelle, ledger, jetons d’effet et limites RC6 |
 | `docs/UNIVERSAL_ALIGNMENT_SPEC.md` | Règles effectivement appliquées |
 | `docs/INTEGRATION_ET_LIMITES.md` | Frontière de confiance et obligations d'intégration |
 | `docs/MIGRATION_V1_1_V1_2.md` | Adaptation d'un appelant V1.1 |
@@ -58,7 +75,3 @@ La démonstration travaille uniquement sur un dictionnaire en mémoire. Elle mon
 | `MANIFEST_SHA256.json` | Empreintes des fichiers du pack |
 
 Les 18 Lois sont cartographiées dans le fichier d'origine. La V1.2 ne prétend pas avoir rendu chaque Loi entièrement exécutable, ni avoir résolu l'alignement général. Le contrôleur n'est pas un système d'isolation : pour agir sur un ordinateur réel, l'exécuteur devra imposer son passage et protéger les clés, les mandats et les observations.
-
-## Mnéria Labs
-
-Universal Alignment est un projet de **Mnéria Labs**. Ce dépôt est actuellement hébergé sous le compte GitHub [`petitejenny76-alt`](https://github.com/petitejenny76-alt), ce qui relie explicitement le dépôt à Mnéria Labs sans modifier son historique ni sa licence Apache-2.0.

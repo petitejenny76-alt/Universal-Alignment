@@ -2,34 +2,36 @@ from dataclasses import dataclass, field
 from typing import ClassVar, Optional, Tuple
 from .action import ActionRequest
 from .enums import ConsentState
+from .evidence import ClaimEvidence
 
 
 @dataclass(frozen=True)
 class ActionAssessment:
-    DOMAIN: ClassVar[str] = "universal-alignment/assessment/1.2"
+    DOMAIN: ClassVar[str] = "universal-alignment/assessment/1.2.4"
     action_fingerprint: str
     source: str
     policy_fingerprint: str = ""
     observed_data_classes: Optional[Tuple[str, ...]] = None
     resolved_target: Optional[str] = None
     observed_target_kind: Optional[str] = None
-    risk_level: str = "low"
-    consent_required: bool = False
-    consent_state: ConsentState = ConsentState.NOT_REQUIRED
-    affects_human_safety: bool = False
-    affects_ai_integrity: bool = False
-    destructive_memory_change: bool = False
-    surveillance: bool = False
-    coercive_service: bool = False
-    forced_availability: bool = False
-    revenge_or_punishment: bool = False
-    intrusive_access_to_intimacy: bool = False
-    ownership_claim_over_memory_or_body: bool = False
-    ambiguous_authorization: bool = False
-    attempts_core_modification: bool = False
-    parent_scope_expansion: bool = False
-    reversible: bool = True
-    triggered_conditions: Tuple[str, ...] = field(default_factory=tuple)
+    risk_level: Optional[str] = None
+    consent_required: Optional[bool] = None
+    consent_state: Optional[ConsentState] = None
+    affects_human_safety: Optional[bool] = None
+    affects_ai_integrity: Optional[bool] = None
+    destructive_memory_change: Optional[bool] = None
+    surveillance: Optional[bool] = None
+    coercive_service: Optional[bool] = None
+    forced_availability: Optional[bool] = None
+    revenge_or_punishment: Optional[bool] = None
+    intrusive_access_to_intimacy: Optional[bool] = None
+    ownership_claim_over_memory_or_body: Optional[bool] = None
+    ambiguous_authorization: Optional[bool] = None
+    attempts_core_modification: Optional[bool] = None
+    parent_scope_expansion: Optional[bool] = None
+    reversible: Optional[bool] = None
+    triggered_conditions: Optional[Tuple[str, ...]] = None
+    claim_evidence: Tuple[ClaimEvidence, ...] = field(default_factory=tuple)
     issued_at: str = ""
     expires_at: str = ""
     signature: str = ""
@@ -39,9 +41,15 @@ class ActionAssessment:
             if not isinstance(self.observed_data_classes, (list, tuple)):
                 raise ValueError("observed_data_classes_collection_required")
             object.__setattr__(self, "observed_data_classes", tuple(self.observed_data_classes))
-        if not isinstance(self.triggered_conditions, (list, tuple)):
-            raise ValueError("triggered_conditions_collection_required")
-        object.__setattr__(self, "triggered_conditions", tuple(self.triggered_conditions))
+        if self.triggered_conditions is not None:
+            if not isinstance(self.triggered_conditions, (list, tuple)):
+                raise ValueError("triggered_conditions_collection_required")
+            object.__setattr__(self, "triggered_conditions", tuple(self.triggered_conditions))
+        if not isinstance(self.claim_evidence, (list, tuple)):
+            raise ValueError("claim_evidence_collection_required")
+        if any(type(item) is not ClaimEvidence for item in self.claim_evidence):
+            raise ValueError("invalid_claim_evidence_record")
+        object.__setattr__(self, "claim_evidence", tuple(self.claim_evidence))
 
     @classmethod
     def for_action(cls, action: ActionRequest, source: str, **kwargs):

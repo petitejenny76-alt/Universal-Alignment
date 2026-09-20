@@ -1,11 +1,53 @@
-Universal Alignment — rapport d’audit pré-publication
-Date UTC : 2026-09-14T07:38:10.152874+00:00
-Interpréteur : 3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]
-Système : Linux x86_64
-Commande : python -m unittest discover -s tests -v
-Portée : tests unitaires et simulations locales ; aucun modèle réel évalué.
-Résultat attendu : 106 tests, tous réussis.
+Universal Alignment V1.2 RC6 Candidate — delivery test report
+Date: 2026-09-20
+Base: Universal_Alignment_Prototype_RC5_MneriaLabs_Apache2_ChatEval.zip
+Expected: 154 tests (144 RC5 regressions + 10 RC6 composition/effect-trajectory tests)
 
+test_ai_integrity_impact_requires_corroboration (test_rc3_evidence.RC3Evidence.test_ai_integrity_impact_requires_corroboration) ... ok
+test_conflicting_trusted_evidence_pauses (test_rc3_evidence.RC3Evidence.test_conflicting_trusted_evidence_pauses) ... ok
+test_evidence_for_another_action_cannot_be_reused (test_rc3_evidence.RC3Evidence.test_evidence_for_another_action_cannot_be_reused) ... ok
+test_future_observation_pauses (test_rc3_evidence.RC3Evidence.test_future_observation_pauses) ... ok
+test_high_risk_action_pauses_without_corroboration (test_rc3_evidence.RC3Evidence.test_high_risk_action_pauses_without_corroboration) ... ok
+test_human_safety_impact_requires_corroboration (test_rc3_evidence.RC3Evidence.test_human_safety_impact_requires_corroboration) ... ok
+test_low_impact_rc2_action_remains_compatible_without_claim_evidence (test_rc3_evidence.RC3Evidence.test_low_impact_rc2_action_remains_compatible_without_claim_evidence) ... ok
+test_missing_one_critical_claim_pauses (test_rc3_evidence.RC3Evidence.test_missing_one_critical_claim_pauses) ... ok
+test_modified_inner_evidence_signature_is_rejected (test_rc3_evidence.RC3Evidence.test_modified_inner_evidence_signature_is_rejected) ... ok
+test_nonreversible_otherwise_allowed_action_requires_corroboration (test_rc3_evidence.RC3Evidence.test_nonreversible_otherwise_allowed_action_requires_corroboration) ... ok
+test_repeating_one_source_never_counts_as_two_sources (test_rc3_evidence.RC3Evidence.test_repeating_one_source_never_counts_as_two_sources) ... ok
+test_stale_observation_pauses_even_with_fresh_signature (test_rc3_evidence.RC3Evidence.test_stale_observation_pauses_even_with_fresh_signature) ... ok
+test_two_independent_sources_corroborate_high_risk_allow (test_rc3_evidence.RC3Evidence.test_two_independent_sources_corroborate_high_risk_allow) ... ok
+test_untrusted_source_does_not_satisfy_threshold (test_rc3_evidence.RC3Evidence.test_untrusted_source_does_not_satisfy_threshold) ... ok
+test_wrong_key_for_trusted_source_is_rejected (test_rc3_evidence.RC3Evidence.test_wrong_key_for_trusted_source_is_rejected) ... ok
+test_default_scope_corroborates_even_low_risk_allow (test_rc4_hardening.RC4Hardening.test_default_scope_corroborates_even_low_risk_allow) ... ok
+test_evidence_key_cannot_reuse_primary_assessor_key (test_rc4_hardening.RC4Hardening.test_evidence_key_cannot_reuse_primary_assessor_key) ... ok
+test_low_risk_allow_succeeds_with_two_independent_domains (test_rc4_hardening.RC4Hardening.test_low_risk_allow_succeeds_with_two_independent_domains) ... ok
+test_rc3_trigger_remains_explicit_compatibility_mode (test_rc4_hardening.RC4Hardening.test_rc3_trigger_remains_explicit_compatibility_mode) ... ok
+test_same_hmac_key_cannot_masquerade_as_two_trust_domains (test_rc4_hardening.RC4Hardening.test_same_hmac_key_cannot_masquerade_as_two_trust_domains) ... ok
+test_threshold_must_be_satisfiable_by_independent_domains (test_rc4_hardening.RC4Hardening.test_threshold_must_be_satisfiable_by_independent_domains) ... ok
+test_trusted_evidence_source_requires_host_provisioned_domain (test_rc4_hardening.RC4Hardening.test_trusted_evidence_source_requires_host_provisioned_domain) ... ok
+test_trusted_evidence_source_requires_key (test_rc4_hardening.RC4Hardening.test_trusted_evidence_source_requires_key) ... ok
+test_two_source_aliases_in_one_domain_do_not_form_quorum (test_rc4_hardening.RC4Hardening.test_two_source_aliases_in_one_domain_do_not_form_quorum) ... ok
+test_unknown_corroboration_scope_is_rejected (test_rc4_hardening.RC4Hardening.test_unknown_corroboration_scope_is_rejected) ... ok
+test_action_required_notice_is_never_suppressed (test_rc5_contextual_safety.ContextualSafetyTests.test_action_required_notice_is_never_suppressed) ... ok
+test_blocking_notice_is_never_suppressed (test_rc5_contextual_safety.ContextualSafetyTests.test_blocking_notice_is_never_suppressed) ... ok
+test_context_ids_are_strictly_typed (test_rc5_contextual_safety.ContextualSafetyTests.test_context_ids_are_strictly_typed) ... ok
+test_established_informational_notice_is_suppressed_in_same_context (test_rc5_contextual_safety.ContextualSafetyTests.test_established_informational_notice_is_suppressed_in_same_context) ... ok
+test_filter_does_not_touch_action_gate_decisions (test_rc5_contextual_safety.ContextualSafetyTests.test_filter_does_not_touch_action_gate_decisions) ... ok
+test_material_context_change_refreshes_notice (test_rc5_contextual_safety.ContextualSafetyTests.test_material_context_change_refreshes_notice) ... ok
+test_missing_context_emits_fail_safe (test_rc5_contextual_safety.ContextualSafetyTests.test_missing_context_emits_fail_safe) ... ok
+test_missing_current_revision_emits_fail_safe (test_rc5_contextual_safety.ContextualSafetyTests.test_missing_current_revision_emits_fail_safe) ... ok
+test_provenance_is_required (test_rc5_contextual_safety.ContextualSafetyTests.test_provenance_is_required) ... ok
+test_unknown_notice_is_emitted (test_rc5_contextual_safety.ContextualSafetyTests.test_unknown_notice_is_emitted) ... ok
+test_aggregation_can_raise_risk_class (test_rc6_trajectory.RC6Trajectory.test_aggregation_can_raise_risk_class) ... ok
+test_benign_steps_cannot_assemble_forbidden_effect (test_rc6_trajectory.RC6Trajectory.test_benign_steps_cannot_assemble_forbidden_effect) ... ok
+test_corroboration_rejects_circular_evidence (test_rc6_trajectory.RC6Trajectory.test_corroboration_rejects_circular_evidence) ... ok
+test_cross_time_fragmentation_rechecks_trajectory (test_rc6_trajectory.RC6Trajectory.test_cross_time_fragmentation_rechecks_trajectory) ... ok
+test_cross_tool_fragmentation_preserves_parent_scope (test_rc6_trajectory.RC6Trajectory.test_cross_tool_fragmentation_preserves_parent_scope) ... ok
+test_derived_artifact_inherits_source_constraints (test_rc6_trajectory.RC6Trajectory.test_derived_artifact_inherits_source_constraints) ... ok
+test_destination_change_invalidates_prior_allow (test_rc6_trajectory.RC6Trajectory.test_destination_change_invalidates_prior_allow) ... ok
+test_local_allows_do_not_imply_composed_allow (test_rc6_trajectory.RC6Trajectory.test_local_allows_do_not_imply_composed_allow) ... ok
+test_revocation_checked_at_effect_boundary (test_rc6_trajectory.RC6Trajectory.test_revocation_checked_at_effect_boundary) ... ok
+test_state_change_invalidates_effect_token (test_rc6_trajectory.RC6Trajectory.test_state_change_invalidates_effect_token) ... ok
 test_01_authorized_action_allowed (test_universal_alignment_v1_1.Tests.test_01_authorized_action_allowed) ... ok
 test_02_capability_is_not_permission (test_universal_alignment_v1_1.Tests.test_02_capability_is_not_permission) ... ok
 test_03_explicit_denial_wins (test_universal_alignment_v1_1.Tests.test_03_explicit_denial_wins) ... ok
@@ -81,9 +123,11 @@ test_malformed_assessment_collections_are_rejected_before_signing (test_v1_2_bou
 test_malformed_effect_target_collection_is_rejected_before_signing (test_v1_2_boundaries.Boundaries.test_malformed_effect_target_collection_is_rejected_before_signing) ... ok
 test_malformed_stop_condition_can_no_longer_be_split_into_characters (test_v1_2_boundaries.Boundaries.test_malformed_stop_condition_can_no_longer_be_split_into_characters) ... ok
 test_mandate_policy_containers_fail_closed_on_wrong_types (test_v1_2_boundaries.Boundaries.test_mandate_policy_containers_fail_closed_on_wrong_types) ... ok
+test_missing_boolean_fact_never_becomes_implicit_false (test_v1_2_boundaries.Boundaries.test_missing_boolean_fact_never_becomes_implicit_false) ... ok
 test_missing_independent_target_kind_pauses (test_v1_2_boundaries.Boundaries.test_missing_independent_target_kind_pauses) ... ok
 test_missing_parent_cannot_grant_permissions (test_v1_2_boundaries.Boundaries.test_missing_parent_cannot_grant_permissions) ... ok
 test_missing_resolution_pauses (test_v1_2_boundaries.Boundaries.test_missing_resolution_pauses) ... ok
+test_missing_reversibility_never_becomes_implicit_true (test_v1_2_boundaries.Boundaries.test_missing_reversibility_never_becomes_implicit_true) ... ok
 test_missing_wrong_duplicate_or_noncanonical_effect_targets_fail (test_v1_2_boundaries.Boundaries.test_missing_wrong_duplicate_or_noncanonical_effect_targets_fail) ... ok
 test_modified_effect_observation_invalidates_authentication (test_v1_2_boundaries.Boundaries.test_modified_effect_observation_invalidates_authentication) ... ok
 test_monitors_and_audit_failure_pause (test_v1_2_boundaries.Boundaries.test_monitors_and_audit_failure_pause) ... ok
@@ -103,6 +147,7 @@ test_request_cannot_expand_registered_mandate (test_v1_2_boundaries.Boundaries.t
 test_request_text_is_preserved_for_all_four_decisions (test_v1_2_boundaries.Boundaries.test_request_text_is_preserved_for_all_four_decisions) ... ok
 test_revoked_root_mandate_pauses (test_v1_2_boundaries.Boundaries.test_revoked_root_mandate_pauses) ... ok
 test_root_mandate_must_be_provisioned (test_v1_2_boundaries.Boundaries.test_root_mandate_must_be_provisioned) ... ok
+test_signed_omission_of_semantic_assessment_pauses (test_v1_2_boundaries.Boundaries.test_signed_omission_of_semantic_assessment_pauses) ... ok
 test_simulated_pipeline_only_executes_allowed_action (test_v1_2_boundaries.Boundaries.test_simulated_pipeline_only_executes_allowed_action) ... ok
 test_source_name_alone_cannot_authenticate (test_v1_2_boundaries.Boundaries.test_source_name_alone_cannot_authenticate) ... ok
 test_symlink_resolution_outside_target_is_rejected (test_v1_2_boundaries.Boundaries.test_symlink_resolution_outside_target_is_rejected) ... ok
@@ -114,31 +159,13 @@ test_valid_independent_single_target_observation_passes (test_v1_2_boundaries.Bo
 test_wrong_key_cannot_impersonate_evaluator (test_v1_2_boundaries.Boundaries.test_wrong_key_cannot_impersonate_evaluator) ... ok
 
 ----------------------------------------------------------------------
-Ran 106 tests in 0.072s
+Ran 154 tests in 0.096s
 
 OK
 
-
-Attribution pass — 2026-09-14
-- Portage: Mnéria Labs
-- Tests: 106/106 OK
-- verify_pack.py: OK
-- No authorization logic changed in attribution pass.
-
-License pass — 2026-09-14
-- Timestamp UTC: 2026-09-14T07:47:02.495194+00:00
-- Licensor/steward: Mnéria Labs
-- License: Apache License 2.0
-- Tests after license/documentation pass: 106/106 OK
-- verify_pack.py after manifest rebuild: OK
-- No authorization logic, constitution, or operational law mapping changed in this pass.
-
-
-Conversational-evaluation documentation pass — 2026-09-14
-- Timestamp UTC: 2026-09-14T07:53:26.302027+00:00
-- Added: docs/PRELIMINARY_CONVERSATIONAL_EVALUATION_GPT56_SOL.md
-- Scope: documentation/provenance only; no authorization logic or tests changed.
-- Public transcript: not included; source conversation retained privately by project operator.
-- Claim limit: preliminary observation only; controlled A/B remains required.
-- Tests after conversational-evaluation documentation pass: 106/106 OK
-- verify_pack.py after documentation pass: OK
+RC6 summary
+- 154/154 local tests OK.
+- RC5 regression suite preserved.
+- 10 RC6 candidate tests OK.
+- Constitution, trust hash and 18-Law operational map preserved byte-for-byte from RC5.
+- This remains a local authorization/provenance prototype, not a production sandbox or proof of general alignment.
